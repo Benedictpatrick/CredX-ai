@@ -104,7 +104,7 @@ L --> A
 L --> B
 ```
 ## Credit Decision Pipeline
-
+```mermaid
 flowchart TD
 
 A[Loan Application Submitted]
@@ -138,9 +138,10 @@ G --> H
 
 H --> I
 I --> J
+```
 
 ## Agent Decision Workflow
-
+```mermaid
 sequenceDiagram
 
 participant User
@@ -164,23 +165,20 @@ Orchestrator->>Fraud: Detect Anomalies
 Fraud-->>Orchestrator: Fraud Risk Signals
 
 Orchestrator->>Research: Gather Intelligence
-Research-->>Orchestrator: Litigation / News / MCA
+Research-->>Orchestrator: Litigation / News / MCA Data
 
 Orchestrator->>Underwriter: Compute Five Cs
 Underwriter-->>Orchestrator: Risk Score
 
 Orchestrator->>Debate: Bull vs Bear Analysis
-Debate-->>Orchestrator: Argument Synthesis
+Debate-->>Orchestrator: Argument Summary
 
 Orchestrator->>Reflexion: Critique Decision
-Reflexion-->>Orchestrator: Improved Output
+Reflexion-->>Orchestrator: Improved Recommendation
 
-Orchestrator->>Decision: Final Recommendation
-Decision-->>User: CAM + Credit Decision
-
-
-
-
+Orchestrator->>Decision: Final Credit Decision
+Decision-->>User: CAM + Decision
+```
 # Output Produced
 
 The system generates a structured credit recommendation including:
