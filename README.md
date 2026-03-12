@@ -44,14 +44,16 @@ Core capabilities include:
 
 ---
 ## System Architecture
+
+```mermaid
 flowchart LR
 
-subgraph User Layer
+subgraph User_Layer
 A[Operator Console - Next.js]
 B[Streamlit Dashboard]
 end
 
-subgraph API Layer
+subgraph API_Layer
 C[FastAPI Backend]
 end
 
@@ -59,7 +61,7 @@ subgraph Orchestration
 D[LangGraph Orchestrator]
 end
 
-subgraph Intelligence Modules
+subgraph Intelligence_Modules
 E[Document Ingestor]
 F[Fraud Engine]
 G[Research Agent]
@@ -68,12 +70,12 @@ I[Bull vs Bear Debate]
 J[Reflexion Loop]
 end
 
-subgraph Output Layer
+subgraph Output_Layer
 K[Decision Engine]
 L[CAM Generator]
 end
 
-subgraph Data Layer
+subgraph Data_Layer
 M[(SQLite Database)]
 N[(Vector Store - Chroma)]
 O[(Document Storage)]
@@ -100,7 +102,7 @@ K --> L
 
 L --> A
 L --> B
-
+```
 ## Credit Decision Pipeline
 
 flowchart TD
