@@ -1,0 +1,12 @@
+__pycache__
+*.pyc
+.env
+.git
+.venv
+venv
+data/uploads/*
+data/vector_store/*
+data/experience_library/*
+*.db
+node_modules
+.pytest_cache

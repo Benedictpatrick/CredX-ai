@@ -1,0 +1,58 @@
+# Titan-Credit Databricks Deployment Configuration
+# Deploy to Mosaic AI + Unity Catalog
+
+display_name: "Titan-Credit Decisioning Engine"
+description: "AI-powered credit decisioning for Indian corporate lending"
+
+# Unity Catalog settings
+catalog: titan_credit
+schema: credit_engine
+
+# Model serving endpoint
+serving_endpoint:
+  name: titan-credit-pipeline
+  config:
+    served_models:
+      - model_name: titan-credit-orchestrator
+        model_version: latest
+        workload_size: Small
+        scale_to_zero_enabled: true
+    traffic_config:
+      routes:
+        - served_model_name: titan-credit-orchestrator
+          traffic_percentage: 100
+
+# Feature tables in Unity Catalog
+feature_tables:
+  - name: company_profiles
+    primary_keys: [cin]
+  - name: loan_applications
+    primary_keys: [application_id]
+  - name: fraud_reports
+    primary_keys: [application_id]
+  - name: cam_reports
+    primary_keys: [cam_id]
+  - name: experience_library
+    primary_keys: [trajectory_id]
+
+# Volumes for document storage
+volumes:
+  - name: uploaded_documents
+    volume_type: MANAGED
+  - name: cam_outputs
+    volume_type: MANAGED
+
+# Job for pipeline execution
+jobs:
+  - name: titan-credit-pipeline-job
+    tasks:
+      - task_key: run_pipeline
+        notebook_task:
+          notebook_path: /Workspace/titan-credit/notebooks/run_pipeline
+        cluster_spec:
+          new_cluster:
+            spark_version: "14.3.x-scala2.12"
+            node_type_id: "Standard_DS3_v2"
+            num_workers: 0
+            spark_conf:
+              spark.master: "local[*]"
